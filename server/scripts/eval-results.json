@@ -1,0 +1,110 @@
+{
+  "guardrails": {
+    "promptHits": 12,
+    "promptTotal": 12,
+    "codeHits": 8,
+    "codeTotal": 8
+  },
+  "retrieval": {
+    "summary": {
+      "cases": 8,
+      "topK": 3,
+      "embeddingRecall": "100%",
+      "pipelineRecall": "100%",
+      "avgContextPercent": 38,
+      "methods": [
+        "retrieval"
+      ]
+    },
+    "rows": [
+      {
+        "prompt": "make the top navigation bar dark with white links",
+        "target": "/components/Header.js",
+        "embeddingHit": true,
+        "rank": 2,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 44
+      },
+      {
+        "prompt": "change the copyright and footer text color to light gray",
+        "target": "/components/Footer.js",
+        "embeddingHit": true,
+        "rank": 1,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 34
+      },
+      {
+        "prompt": "make the main banner heading much bigger and bolder",
+        "target": "/components/Hero.js",
+        "embeddingHit": true,
+        "rank": 1,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 32
+      },
+      {
+        "prompt": "make the pricing cards rounded with a subtle shadow",
+        "skipped": true
+      },
+      {
+        "prompt": "add a phone number field to the contact form",
+        "target": "/components/Contact.js",
+        "embeddingHit": true,
+        "rank": 1,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 58
+      },
+      {
+        "prompt": "show customer reviews in a three column grid",
+        "skipped": true
+      },
+      {
+        "prompt": "change the primary color of the whole site to teal",
+        "target": "/styles.css",
+        "embeddingHit": true,
+        "rank": 2,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 32
+      },
+      {
+        "prompt": "use a different Google font for all headings",
+        "target": "/styles.css",
+        "embeddingHit": true,
+        "rank": 3,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 17
+      },
+      {
+        "prompt": "add icons above each feature description",
+        "target": "/components/Features.js",
+        "embeddingHit": true,
+        "rank": 1,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 38
+      },
+      {
+        "prompt": "make the call to action button at the bottom larger",
+        "target": "/components/Hero.js, /components/Footer.js",
+        "embeddingHit": true,
+        "rank": 3,
+        "pipelineHit": true,
+        "method": "retrieval",
+        "filesSent": "4/11",
+        "contextPct": 49
+      }
+    ]
+  }
+}

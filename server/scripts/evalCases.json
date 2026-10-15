@@ -1,0 +1,41 @@
+[
+  {
+    "prompt": "make the top navigation bar dark with white links",
+    "expect": "(nav|header)"
+  },
+  {
+    "prompt": "change the copyright and footer text color to light gray",
+    "expect": "footer"
+  },
+  {
+    "prompt": "make the main banner heading much bigger and bolder",
+    "expect": "(hero|banner|home)"
+  },
+
+  {
+    "prompt": "add a phone number field to the contact form",
+    "expect": "(contact|form)"
+  },
+  {
+    "prompt": "make the photo gallery images rounded with a hover zoom",
+    "expect": "portfolio"
+  },
+  {
+    "prompt": "change the hero section background to a darker overlay",
+    "expect": "hero"
+  },
+
+  {
+    "prompt": "change the primary color of the whole site to teal",
+    "expect": "(styles|css|theme)"
+  },
+  {
+    "prompt": "use a different Google font for all headings",
+    "expect": "(styles|css)"
+  },
+  { "prompt": "add icons above each feature description", "expect": "feature" },
+  {
+    "prompt": "make the call to action button at the bottom larger",
+    "expect": "(cta|action|footer|hero)"
+  }
+]

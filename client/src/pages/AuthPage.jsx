@@ -134,7 +134,7 @@ const AuthPage = ({ mode }) => {
           <p className=" text-zinc-500 mt-4">
             {islogin ? (
               <>
-                New to PromptForge?{" "}
+                New to SiteGen?{" "}
                 <Link
                   to="/register"
                   className="text-zinc-900 font medium hover:underline"

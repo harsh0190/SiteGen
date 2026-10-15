@@ -30,7 +30,7 @@ text-slate-300
     >
       {/* COPYRIGHT */}
 
-      <div>PromptForge © 2026</div>
+      <div>SiteGen © 2026</div>
 
       {/* BUILT BY */}
 

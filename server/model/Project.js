@@ -40,6 +40,8 @@ const ProjectSchema = new Schema(
     filesGenerated: { type: [String], default: [] },
     currentFile: { type: String, default: null },
     error: { type: String, default: null },
+    embedding: { type: [Number], default: undefined, select: false },
+    embeddingModel: { type: String, default: null, select: false },
   },
   { timestamps: true },
 );

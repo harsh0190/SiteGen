@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import PromptInput from "../components/PromptInput";
 import { useNavigate } from "react-router-dom";
-import { Trash2Icon } from "lucide-react";
+import { SearchIcon, Trash2Icon, XIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import api from "../api/api";
 import { homeTags } from "../assets/assets";
 
 const HomePage = () => {
@@ -22,15 +24,44 @@ const HomePage = () => {
     loadProjects();
   }, [loadProjects]);
 
+  // Semantic search: results === null means "not searching, show all projects"
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState(null);
+  const [searching, setSearching] = useState(false);
+
+  // Runs on submit (not on every keystroke) so each search is one embedding call
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+
+    setSearching(true);
+    try {
+      const { data } = await api.get("/api/projects/search", {
+        params: { q },
+      });
+      setResults(data);
+    } catch (error) {
+      toast.error(error.response?.data?.error || "Search failed");
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setResults(null);
+  };
+
+  const visibleProjects = results ?? projects;
+
   return (
     <div className="h-screen overflow-y-scroll text-white font-sans bg-[url('/bg-img.png')] bg-cover bg-center bg-no-repeat ">
       {/* Nav */}
       <nav className="stick top-0 z-10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2">
           <img src="/logo.svg" alt="Logo" className="size-6" />
-          <span className="text-xl font-semibold tracking-tight">
-            PromptForge
-          </span>
+          <span className="text-xl font-semibold tracking-tight">SiteGen</span>
         </div>
         <div className=" flex items-center gap-4 text-sm font-medium text-zinc-300">
           <span>{user?.name}</span>
@@ -94,8 +125,51 @@ const HomePage = () => {
                 </span>
               </div>
 
+              {/* Semantic search */}
+              <form
+                onSubmit={handleSearch}
+                className="flex items-center gap-2 mb-3"
+              >
+                <div className="relative flex-1">
+                  <SearchIcon
+                    size={14}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300"
+                  />
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    maxLength={300}
+                    placeholder="Search by meaning, e.g. online store"
+                    className="w-full bg-white/5 border border-white/20 rounded-md pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/40"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={searching || !query.trim()}
+                  className="py-2 px-3 text-sm border border-white/20 text-white hover:bg-black/50 rounded-md cursor-pointer bg-black/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {searching ? "Searching..." : "Search"}
+                </button>
+                {results !== null && (
+                  <button
+                    type="button"
+                    onClick={clearSearch}
+                    aria-label="Clear search"
+                    className="p-2 border border-white/20 text-zinc-200 hover:bg-white/10 rounded-md cursor-pointer bg-transparent"
+                  >
+                    <XIcon size={14} />
+                  </button>
+                )}
+              </form>
+
+              {results !== null && results.length === 0 && (
+                <p className="text-sm text-white/65 py-3">
+                  No similar projects found. Try different words.
+                </p>
+              )}
+
               <div className="space-y-2 max-h[80vh] overflow-y-auto pr-1">
-                {projects.map((p) => (
+                {visibleProjects.map((p) => (
                   <div
                     key={p._id}
                     className="bg-white/5 border border-white/20 rounded-lg px-4 py-3 flex items-center justify-between group hover:border-white/30 hover:bg-white/10 cursor-pointer backdrop-blur-md transition-all"
@@ -108,10 +182,18 @@ const HomePage = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      {p.score !== undefined && (
+                        <span className="text-xs text-zinc-200 border border-white/20 rounded-full px-2 py-0.5">
+                          {Math.round(p.score * 100)}% match
+                        </span>
+                      )}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(p._id);
+                          setResults(
+                            (r) => r && r.filter((x) => x._id !== p._id),
+                          );
                         }}
                         className="border border-white/10 text-zinc-200 hover:text-red-400 hover:border-white/40 p-1.5 rounded-md cursor-pointer transition-opacity"
                       >

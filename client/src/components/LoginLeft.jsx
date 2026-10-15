@@ -7,7 +7,7 @@ const LoginLeft = () => {
     <div className="flex lg:w-2/5 bg-[url('/bg-img.png')] bg-cover bg-center bg-no-repeat flex-col justify-between p-12 shrink-0 select-none">
       <div className="flex items-center gap-3">
         <img src="/logo.svg" alt="Logo" className="size-9.5" />
-        <span className="text-4xl font-medium text-white">PromptForge</span>
+        <span className="text-4xl font-medium text-white">SiteGen</span>
       </div>
       <div>
         <h2 className="text-3xl text-white font-medium leading-snug mb-3 tracking-tight">
@@ -18,7 +18,7 @@ const LoginLeft = () => {
           real-time.
         </p>
         <p className="text-zinc-300 text-sm mt-20">
-          Copyright {new Date().getFullYear()} PromptForge. All rights reserved.
+          Copyright {new Date().getFullYear()} SiteGen. All rights reserved.
         </p>
 
         {/* BUILT BY */}

@@ -16,6 +16,7 @@ import {
   validateAndFixCode,
   validateRevisionContent,
 } from "./codeValidator.js";
+import { scanGeneratedCode } from "./guardrails.js";
 
 // --- OpenRouter Model Client Setup ---
 const MODEL = process.env.OPENROUTER_MODEL || "openrouter/free";
@@ -64,6 +65,16 @@ async function generateSingleFile(
   if (validation.warnings.length > 0) {
     console.log(
       `[Validator] Code adjustments for ${file.path}:\n  - ${validation.warnings.join("\n  - ")}`,
+    );
+  }
+
+  const scan = scanGeneratedCode(file.path, code);
+  if (scan.warnings.length > 0) {
+    console.log(`[Guardrail] ${file.path} uses: ${scan.warnings.join(", ")}`);
+  }
+  if (scan.blocked.length > 0) {
+    throw new Error(
+      `Guardrail blocked ${file.path}: ${scan.blocked.join(", ")}`,
     );
   }
 
