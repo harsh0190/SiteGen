@@ -7,7 +7,7 @@ Describe a website in plain language and it plans the file structure, generates 
 
 ## 🌐 Live Demo
 
-- **Frontend:** https://~promptforge~-dev.vercel.app
+- **Frontend:** https://sitegen-builder.vercel.app
 - **Backend API:** https://promptforge-744l.onrender.com
 
 ---
