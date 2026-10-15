@@ -88,7 +88,7 @@ This is a small benchmark on one project. Edit quality was not measured.
 
 ```bash
 # Clone the repository
-git clone https://github.com/harsh0190/PromptForge.git
+git clone https://github.com/harsh0190/SiteGen.git
 
 # Install dependencies
 cd client && npm install
